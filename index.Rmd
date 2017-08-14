@@ -1,0 +1,12 @@
+---
+title: "osc: Tools for the Organic Surface Chemistry group"
+author: "Emil Tveden Bjerglund"
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook: default
+---
+
+# Preface
+
+This book was written as extended documentation for the `osc` R package, created to simplify and unify data analysis in the [Organic Surface Chemistry group](http://surfchem.dk).
