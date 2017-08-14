@@ -7,6 +7,14 @@ github-repo: spoman/oscbook
 url: 'https\://github.com/SPOMAN/oscbook'
 ---
 
-# Preface
+# Preface {-}
 
 This book was written as extended documentation for the `osc` R package, created to simplify and unify data analysis in the [Organic Surface Chemistry group](http://surfchem.dk).
+
+If you have never used R or any other scripting-based tools for data analysis you have some way to go. However, I promise you that it will be well worth the effort. Some of the benefits you get from scripting-based analysis are:
+
+* Your data analysis becomes **very transparent and open**, meaning that other people can easily see how you got from your data to the results.
+* It is very easy to **reuse code** that is part of analysis, and repetitive steps are therefore easily automated.
+* Your analysis becomes **completely reproducible**. That means that you (or the next student in the group) can get back to your code and raw data many months later and still understand what you did. Compare that with getting back to an Excel spreadsheet made 6 months ago and having to repeat the exact same analysis.
+
+The package contains tools to make it easy to load, plot and do common operations with the data-types that we often encounter in the Organic Surface Chemistry group. See the different methods to read about the tools for [Electrochemical methods], [XPS][X-ray Photoelectron Spectroscopy (XPS)] and [Raman spectroscopy].

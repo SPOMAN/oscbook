@@ -1,1 +1,12 @@
 output_dir: "docs"
+
+rmd_files: [
+  "index.Rmd",
+  "getting-started.Rmd",
+
+  "electrochemistry.Rmd",
+  "xps.Rmd",
+  "raman.Rmd",
+
+  "misc.Rmd"
+]

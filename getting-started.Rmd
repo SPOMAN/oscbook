@@ -1,0 +1,39 @@
+# Getting started
+
+## What is R?
+> R is an open source programming language and software environment for statistical computing and graphics that is supported by the R Foundation for Statistical Computing. The R language is widely used among statisticians and data miners for developing statistical software and data analysis. [Wikipedia](https://en.wikipedia.org/wiki/R_(programming_language))
+
+## Installing R {#installing-r}
+To work in R you will need to download and install two different programs:
+
+* **R** is downloaded for your operating system from CRAN (The Comprehensive R Archive Network). Go to https://mirrors.dotsrc.org/cran/ and select your operating system. Find the most recent version, download and install it.
+* **RStudio** is a development environment made specifically for working with R. It can be downloaded and installed from https://www.rstudio.com/products/rstudio/#Desktop.
+
+## Installing the osc package
+The package is not currently on CRAN, but can be installed using `devtools` by running the code below in the console. Before you are able to do this, you must have [R and RStudio installed](#installing-r)
+
+```{r eval=FALSE}
+# Install devtools and then use it to install the osc package
+install.packages('devtools')
+devtools::install_github('spoman/osc')
+
+# Load the package
+library(osc)
+```
+
+## Getting started with R
+If you have no prior experience with programming, then the learning curve might feel quite steep. In the beginning even simple things will seem difficult, but with practice you will experience that once you've got an understanding of the basics, it is very easy to put things together and do more advanced procedures.
+
+You can dig into the examples provided for the various analytical methods. Based on those you should be able to load, plot and do common operations with your own data. Don't be scared - most of the code is pretty close to plain english, spiced with some logic on how to read and treat the data. 
+
+Some good ressources to get a more basic introduction to R can be found here:
+
+* [Datacamp](https://www.datacamp.com/courses/free-introduction-to-r) has a free introduction to R which covers the very basics in a series of video tutorials. 
+* [R for Data Science](http://r4ds.had.co.nz/) is a book by Hadley Wickham about the packages in the *tidyverse*. It is a great guide on how to load data, getting in into a tidy format that makes it easy to work with and how to model and plot it to obtain interesting results. 
+
+## Analysis in an R Notebook
+The best way to work with data in R is in an [R Notebook](http://rmarkdown.rstudio.com/r_notebooks.html). An R Notebook is easily created in RStudio, and it allows you to mix plain text describing your experiment with R code that can be used to load and work with data. This keeps your entire analysis in one file, making it much more clear what you are doing. See the short video below to get a sense of how an R Notebook works.
+
+<video style="width:100%;" controls>
+  <source src="../content/rnotebook.mp4" type="video/mp4">
+</video>
