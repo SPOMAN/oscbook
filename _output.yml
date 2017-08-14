@@ -1,0 +1,6 @@
+bookdown::gitbook:
+  config:
+    toc:
+      before: |
+        <li><strong><a href="./">osc tools</a></strong></li>
+    sharing: no
