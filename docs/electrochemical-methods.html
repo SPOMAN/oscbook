@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>osc: Tools for the Organic Surface Chemistry group</title>
-  <meta name="description" content="osc: Tools for the Organic Surface Chemistry group">
-  <meta name="generator" content="bookdown 0.4.1 and GitBook 2.6.7">
+  <title>osctools: Tools for the Organic Surface Chemistry group</title>
+  <meta name="description" content="osctools: Tools for the Organic Surface Chemistry group">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
-  <meta property="og:title" content="osc: Tools for the Organic Surface Chemistry group" />
+  <meta property="og:title" content="osctools: Tools for the Organic Surface Chemistry group" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/SPOMAN/oscbook" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="spoman/oscbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="osc: Tools for the Organic Surface Chemistry group" />
+  <meta name="twitter:title" content="osctools: Tools for the Organic Surface Chemistry group" />
   
   
   
@@ -110,7 +110,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5" data-path="getting-started.html"><a href="getting-started.html#analysis-in-an-r-notebook"><i class="fa fa-check"></i><b>1.5</b> Analysis in an R Notebook</a></li>
 </ul></li>
 <li class="part"><span><b>I Analytical methods</b></span></li>
-<li class="chapter" data-level="2" data-path="electrochemical-methods.html"><a href="electrochemical-methods.html"><i class="fa fa-check"></i><b>2</b> Electrochemical methods</a></li>
+<li class="chapter" data-level="2" data-path="electrochemical-methods.html"><a href="electrochemical-methods.html"><i class="fa fa-check"></i><b>2</b> Electrochemical methods</a><ul>
+<li class="chapter" data-level="2.1" data-path="electrochemical-methods.html"><a href="electrochemical-methods.html#cyclic-voltammetry"><i class="fa fa-check"></i><b>2.1</b> Cyclic voltammetry</a></li>
+<li class="chapter" data-level="2.2" data-path="electrochemical-methods.html"><a href="electrochemical-methods.html#electrolysis"><i class="fa fa-check"></i><b>2.2</b> Electrolysis</a></li>
+<li class="chapter" data-level="2.3" data-path="electrochemical-methods.html"><a href="electrochemical-methods.html#loading-several-files"><i class="fa fa-check"></i><b>2.3</b> Loading several files</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="x-ray-photoelectron-spectroscopy-xps.html"><a href="x-ray-photoelectron-spectroscopy-xps.html"><i class="fa fa-check"></i><b>3</b> X-ray Photoelectron Spectroscopy (XPS)</a></li>
 <li class="chapter" data-level="4" data-path="raman-spectroscopy.html"><a href="raman-spectroscopy.html"><i class="fa fa-check"></i><b>4</b> Raman spectroscopy</a></li>
 <li class="part"><span><b>II Additional info</b></span></li>
@@ -125,7 +129,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">osc: Tools for the Organic Surface Chemistry group</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">osctools: Tools for the Organic Surface Chemistry group</a>
           </h1>
         </div>
 
@@ -135,7 +139,83 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="electrochemical-methods" class="section level1">
 <h1><span class="header-section-number">2</span> Electrochemical methods</h1>
+<p>To load electrochemical data (i.e. cyclic voltammograms or bulk electrolysis) the <code>echem_read()</code> function can be used. It will try to determine the type of experiment and read it accordingly.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p>The package contains a few example files that we will use here. To use your own files, just supply the filename.</p>
+<div id="cyclic-voltammetry" class="section level2">
+<h2><span class="header-section-number">2.1</span> Cyclic voltammetry</h2>
+<p>CV data can be loaded from a txt-file.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(osctools)</code></pre></div>
+<pre><code>## Loading osctools...
+## See https://spoman.github.io/oscbook/ for examples</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This chould just as well be the path to your file as a string, i.e. </span>
+<span class="co"># file &lt;- &quot;data/cv_example.txt&quot;</span>
+file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/cv/cv_example.txt&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;osctools&quot;</span>)
 
+cv1 &lt;-<span class="st"> </span><span class="kw">echem_read</span>(file)
+cv1</code></pre></div>
+<pre><code>## Cyclic Voltammetry at 0.1 V/s
+## Initial scan polarity: N, Scan segments: 212
+## Init E: 0 V, High E: 0 V, Low E: -2.5 V
+## Sensitivity: 1e-05, Quiet time: 2 s
+## 
+## # A tibble: 5,000 x 6
+##   potential    current direc change sweep    cv
+##       &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.000 -4.901e-09   neg      0     1     1
+## 2    -0.001 -1.236e-08   neg      0     1     1
+## 3    -0.002 -1.481e-08   neg      0     1     1
+## 4    -0.003 -1.547e-08   neg      0     1     1
+## 5    -0.004 -1.641e-08   neg      0     1     1
+## # ... with 4,995 more rows</code></pre>
+<p>In case that the file is just a pure CV file without any leading metadata, you will need to specify the type of experiment.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">file2 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/cv/cv_example4.txt&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;osctools&quot;</span>)
+cv2 &lt;-<span class="st"> </span><span class="kw">echem_read</span>(file2, <span class="dt">type =</span> <span class="st">&quot;CV&quot;</span>)</code></pre></div>
+<p>The CV objects can be plotted directly for quick assesment. However, they probably need tweaking to your specific need before they are ready for publication.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(cv1)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="electrolysis" class="section level2">
+<h2><span class="header-section-number">2.2</span> Electrolysis</h2>
+<p>The same principles applies to loading and plotting a bulk electrolysis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elec1 &lt;-<span class="st"> </span><span class="kw">echem_read</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata/electrolysis/electrolysis_example.txt&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;osctools&quot;</span>))</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   time = col_double(),
+##   charge = col_double(),
+##   current = col_double()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(elec1)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="loading-several-files" class="section level2">
+<h2><span class="header-section-number">2.3</span> Loading several files</h2>
+<p>It is very common to have a folder full of data-files that you want to load into one table. An easy way to do that is by making a list of the filenames and then using <code>purrr::map()</code> to iterate over the file names.</p>
+<p>For this example we have a folder containing 4 files.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/cv&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;CV (1).txt&quot; &quot;CV (2).txt&quot; &quot;CV (3).txt&quot; &quot;CV (4).txt&quot;</code></pre>
+<p>We can make a list of the file names and apply <code>echem_read()</code> to all of them.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+
+path &lt;-<span class="st"> &quot;data/cv/&quot;</span>
+data &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">files =</span> <span class="kw">list.files</span>(<span class="dt">path =</span> path, <span class="dt">pattern =</span> <span class="st">&quot;*.txt&quot;</span>))
+
+<span class="co"># Load all data from the files into the tibble</span>
+data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">d =</span> <span class="kw">map</span>(<span class="kw">paste0</span>(path, files), echem_read)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unnest</span>()</code></pre></div>
+<p>We can then use <code>ggplot2</code> to plot them all simultaneously.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(potential, current, <span class="dt">color =</span> files)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_path</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>If you have problems reading certain files, then please file a <a href="https://github.com/SPOMAN/osctools/issues">Github issue</a> and describe the problem or a pull request with a suggested solution. Remember to add a link to the file causing problems.<a href="electrochemical-methods.html#fnref1">↩</a></p></li>
+</ol>
 </div>
             </section>
 

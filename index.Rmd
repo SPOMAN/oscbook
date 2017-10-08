@@ -1,5 +1,5 @@
 ---
-title: "osc: Tools for the Organic Surface Chemistry group"
+title: "osctools: Tools for the Organic Surface Chemistry group"
 author: "Emil Tveden Bjerglund"
 site: bookdown::bookdown_site
 documentclass: book
@@ -9,7 +9,7 @@ url: 'https\://github.com/SPOMAN/oscbook'
 
 # Preface {-}
 
-This book was written as extended documentation for the `osc` R package, created to simplify and unify data analysis in the [Organic Surface Chemistry group](http://surfchem.dk).
+This book was written as extended documentation for the `osctools` R package, created to simplify and unify data analysis in the [Organic Surface Chemistry group](http://surfchem.dk).
 
 If you have never used R or any other scripting-based tools for data analysis you have some way to go. However, I promise you that it will be well worth the effort. Some of the benefits you get from scripting-based analysis are:
 

@@ -2,3 +2,72 @@
 
 # Electrochemical methods
 
+To load electrochemical data (i.e. cyclic voltammograms or bulk electrolysis) the `echem_read()` function can be used. It will try to determine the type of experiment and read it accordingly.^[If you have problems reading certain files, then please file a [Github issue](https://github.com/SPOMAN/osctools/issues) and describe the problem or a pull request with a suggested solution. Remember to add a link to the file causing problems.]
+
+The package contains a few example files that we will use here. To use your own files, just supply the filename.
+
+## Cyclic voltammetry
+CV data can be loaded from a txt-file.
+```{r}
+library(osctools)
+
+# This chould just as well be the path to your file as a string, i.e. 
+# file <- "data/cv_example.txt"
+file <- system.file("extdata/cv/cv_example.txt", package = "osctools")
+
+cv1 <- echem_read(file)
+cv1
+```
+
+In case that the file is just a pure CV file without any leading metadata, you will need to specify the type of experiment.
+
+```{r}
+file2 <- system.file("extdata/cv/cv_example4.txt", package = "osctools")
+cv2 <- echem_read(file2, type = "CV")
+```
+
+The CV objects can be plotted directly for quick assesment. However, they probably need tweaking to your specific need before they are ready for publication.
+
+```{r}
+plot(cv1)
+```
+
+## Electrolysis
+The same principles applies to loading and plotting a bulk electrolysis.
+
+```{r}
+elec1 <- echem_read(system.file("extdata/electrolysis/electrolysis_example.txt", package = "osctools"))
+plot(elec1)
+```
+
+## Loading several files
+It is very common to have a folder full of data-files that you want to load into one table. An easy way to do that is by making a list of the filenames and then using `purrr::map()` to iterate over the file names.
+
+For this example we have a folder containing 4 files.
+
+```{r}
+list.files(path = "data/cv")
+```
+
+We can make a list of the file names and apply `echem_read()` to all of them.
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+path <- "data/cv/"
+data <- tibble(files = list.files(path = path, pattern = "*.txt"))
+
+# Load all data from the files into the tibble
+data <- data %>% 
+  mutate(d = map(paste0(path, files), echem_read)) %>% 
+  unnest()
+```
+
+We can then use `ggplot2` to plot them all simultaneously.
+
+```{r}
+data %>% 
+  ggplot(aes(potential, current, color = files)) + 
+  geom_path()
+```
+

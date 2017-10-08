@@ -15,10 +15,10 @@ The package is not currently on CRAN, but can be installed using `devtools` by r
 ```{r eval=FALSE}
 # Install devtools and then use it to install the osc package
 install.packages('devtools')
-devtools::install_github('spoman/osc')
+devtools::install_github('spoman/osctools')
 
 # Load the package
-library(osc)
+library(osctools)
 ```
 
 ## Getting started with R
