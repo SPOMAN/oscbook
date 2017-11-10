@@ -8,5 +8,6 @@ rmd_files: [
   "xps.Rmd",
   "raman.Rmd",
 
+  "interactive.Rmd",
   "misc.Rmd"
 ]

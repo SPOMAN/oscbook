@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="x-ray-photoelectron-spectroscopy-xps.html">
-<link rel="next" href="interactive-analysis-tools.html">
+<link rel="prev" href="raman-spectroscopy.html">
+<link rel="next" href="saving-figures.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -140,20 +140,51 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="raman-spectroscopy" class="section level1">
-<h1><span class="header-section-number">4</span> Raman spectroscopy</h1>
+<div id="interactive-analysis-tools" class="section level1">
+<h1><span class="header-section-number">5</span> Interactive analysis tools</h1>
+<div id="peak-picking" class="section level2">
+<h2><span class="header-section-number">5.1</span> Peak picking</h2>
+<p>As of <code>osctools</code> v0.0.2 a shinyGadget for peak-picking in any dataset was introduced. There are many algoritms for automatic peak detection in datasets, but they are usually difficult to generalise over e.g. many spectra. The <code>peak_picker()</code> shinyGadget displays a given dataset from a set of x- and y-coordinates and allows you to select peaks by clicking. It will automatically try to determine the nearest peak when selecting a point in the dataset (unless disabled by setting <code>find_nearest = FALSE</code>).</p>
+<p>To demonstrate the functionality we have a Raman spectrum of a diazonium salt loaded in a tibble.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">print</span>(raman_spectrum, <span class="dt">n =</span> <span class="dv">5</span>)</code></pre></div>
+<pre><code>## # A tibble: 1,015 x 2
+##   wavenumber int_mean
+##        &lt;dbl&gt;    &lt;dbl&gt;
+## 1      193.7     40.5
+## 2      195.1     41.4
+## 3      196.6     34.7
+## 4      198.1     34.0
+## 5      199.5     31.3
+## # ... with 1,010 more rows</code></pre>
+<p>The <code>peak_picker()</code> can be launched from RStudio by supplying a tibble with data, and specifying the x- and y-columns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(osctools)
+
+<span class="kw">peak_picker</span>(raman_spectrum, wavenumber, int_mean)</code></pre></div>
+<video style="width:100%;" controls>
+<source src="content/peak_picker.mp4" type="video/mp4">
+</video>
+<p>After pressing Done, the results will be output to the console. A piece of code is also shown, and is automatically copied to your clipboard. You should paste this into your code, in order to ensure reproducibility the next time you run the code.</p>
+<pre><code>15 peaks found in the dataset
+The add_peaks() function below has been copied to the clipboard!
+Please paste it in your script for reproducibility.
+    raman_spectrum &lt;- raman_spectrum %&gt;% add_peaks(c(177,215,233,316,349,410,448,470,528,598,644,749,843,902,967))</code></pre>
+<p>Using the code output, it is easy to later reproduce the plot from the gadget using the <code>plot_peaks()</code> function. It returns a ggplot2 object, so we can easily add more layers to the plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raman_spectrum <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_peaks</span>(<span class="kw">c</span>(<span class="dv">177</span>,<span class="dv">215</span>,<span class="dv">233</span>,<span class="dv">316</span>,<span class="dv">349</span>,<span class="dv">410</span>,<span class="dv">448</span>,<span class="dv">470</span>,<span class="dv">528</span>,<span class="dv">598</span>,<span class="dv">644</span>,<span class="dv">749</span>,<span class="dv">843</span>,<span class="dv">902</span>,<span class="dv">967</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">plot_peaks</span>(wavenumber, int_mean) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;Wavenumber (&quot;</span>, cm<span class="op">^-</span><span class="dv">1</span>,<span class="st">&quot;)&quot;</span>)), <span class="dt">y =</span> <span class="st">&quot;Intensity (a.u.)&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 
 </div>
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="x-ray-photoelectron-spectroscopy-xps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="interactive-analysis-tools.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="raman-spectroscopy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="saving-figures.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
